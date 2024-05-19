@@ -97,7 +97,7 @@
                 <h3 class="text-lg p-2 font-medium text-center ">Hair Cut <br> Hair Wash <br> Hot Towel <br> Reflexology <br> Free Hair Shaving <br> Free Hair Styling <br> Free Pomade / Hair Tonic / Hair Powder</h3>
             </div>
         </div>
-        <a class="items-start flex text-4xl font-extrabold mb-12 px-5 py-2 text-center rounded-full bg-slate-600 text-slate-200 shadow-xl hover:bg-gradient-to-br from-slate-400 to-slate-700 hover:shadow-slate-700 hover:shadow-lg transition-" href="booking">Booking <span class="text-lg italic font-semibold ml-1">for now</span></a>
+        <a class="items-start flex text-4xl font-extrabold mb-12 px-5 py-2 text-center rounded-full bg-slate-600 text-slate-200 shadow-xl hover:bg-gradient-to-br from-slate-400 to-slate-700 hover:shadow-slate-700 hover:shadow-lg " href="booking">Booking <span class="text-lg italic font-semibold ml-1">for now</span></a>
     </service>
     <!--===FOOTER===-->
     <footer class=" bg-slate-600" id="bottom">

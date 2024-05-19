@@ -16,38 +16,12 @@
 </head>
 
 <body class="antialiased bg-slate-100">
-    <!-- === NAVBAR ===
-    <div class="fixed w-full  bg-slate-600 shadow-lg">
-        <div class="container mx-auto px-4 ">
-            <div class="flex items-center justify-between py-4">
-                <div>
-                    <a href="/">
-                        <x-application-logo />
-                    </a>
-                </div>
-                <div class="hidden sm:flex sm:items-center">
-                    @if (Route::has('login'))
-                    @auth
-                    <a href="{{ url('/profile') }}" class="font-semibold text-gray-300 hover:text-white ">{{ Auth::user()->name }}</a>
-                    @else
-                    <a href="{{ route('login') }}" class="text-gray-300 text-sm font-semibold hover:text-white mr-4">Sign in</a>
-
-                    @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="text-gray-300 text-sm font-semibold hover:text-white">Sign up</a>
-                    @endif
-                    @endauth
-                </div>
-                @endif
-            </div>
-        </div>
-    </div> -->
     <div class="w-screen ">
         <div class="relative mx-auto mt-24 mb-24 max-w-screen-lg overflow-hidden rounded-xl bg-slate-600/80 py-32 text-center shadow-xl shadow-slate-400">
             <h1 class="mt-2 px-8 text-5xl font-extrabold text-yellow-400 md:text-7xl">Book an Appointment</h1>
             <p class="mt-6 text-3xl text-white font-semibold">Semua Service bikin lo <span class="font-bold ">tampil beda !</span></p>
             <img class="absolute top-0 left-0 -z-10 h-full w-full object-cover" src="img/single.jpg" alt="" />
         </div>
-        <!-- user information -->
         <div class="mx-auto grid max-w-screen-lg px-6 my-6">
             @csrf
             <div class="text-xl font-bold text-slate-700"> Account Information
@@ -63,14 +37,14 @@
                 <p class="text-xl font-bold text-slate-700">Select a service</p>
                 <div class="mt-4 grid max-w-3xl gap-x-4 gap-y-3 sm:grid-cols-2 md:grid-cols-3">
                     <div class="relative">
-                        <input class="peer hidden" id="radio_1" type="radio" name="radio" checked />
+                        <input class="peer hidden" id="radio_1" value="std" type="radio" name="radio" checked />
                         <span class="absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-yellow-200 bg-white peer-checked:border-slate-400 peer-checked:bg-yellow-400"></span>
                         <label class="flex h-full cursor-pointer flex-col rounded-lg p-4 shadow-lg shadow-slate-300 peer-checked:bg-yellow-500 peer-checked:text-white" for="radio_1">
                             <span class="items-center my-3 font-bold text-lg">Standard</span>
                         </label>
                     </div>
                     <div class="relative">
-                        <input class="peer hidden" id="radio_2" type="radio" name="radio" />
+                        <input class="peer hidden" id="radio_2" value="full" type="radio" name="radio" />
                         <span class="absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-yellow-200 bg-white peer-checked:border-slate-400 peer-checked:bg-yellow-400"></span>
                         <label class="flex h-full cursor-pointer flex-col rounded-lg p-4 shadow-lg shadow-slate-300 peer-checked:bg-yellow-500 peer-checked:text-white" for="radio_2">
                             <span class="items-center my-3 font-bold text-lg">Full Package</span>
@@ -78,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <form action="/booking" method="POST">
+            <form action="booking" method="get">
                 @csrf
                 <div class="">
                     <p class="mt-8 text-xl font-bold text-slate-700">Select a date</p>
@@ -91,20 +65,44 @@
                         <input datepicker="" name="tanggal" id="tanggalboking" datepicker-orientation="bottom" autofocus="autofocus" type="text" class="datepicker-input block w-full rounded-lg border border-slate-400 bg-slate-50 p-2.5 pl-10 text-slate-800 outline-none ring-opacity-30 placeholder:text-slate-800 focus:ring focus:ring-slate-400 sm:text-sm" placeholder="Select date" />
                     </div>
                 </div>
-                <button class="" type="submit">Pilih Tanggal</button>
+                <button type="submit" class="mt-6 fa-solid fa-circle-check fa-2xl active:rotate-45"></button>
             </form>
-            <div class="">
-                <p class="mt-8 text-xl font-bold text-slate-700">Select a time</p>
-                @foreach ($tanggal as $jam)
-                <div class="mt-4 grid lg:grid-cols-8 sm:grid-cols-4 gap-2 lg:max-w-screen ">
-                    <button class="rounded-lg bg-slate-300 px-4 py-2 font-medium text-slate-900 hover:bg-slate-400  focus:bg-slate-800 focus:text-white">{{$jam->jam }}</button>
+            <form method="post" action="/confirm">
+                @csrf
+                <div class="">
+                    <p class="mt-8 text-xl font-bold text-slate-700">Select a time</p>
+                    <div class="mt-4 grid lg:grid-cols-6 sm:grid-cols-4 gap-2 lg:max-w-screen ">
+                        @foreach ($tanggal as $jam)
+                        <button type="button" id="bt{{ $jam->id }}" value="{{ $jam->jam }}" class="bg-slate-300 px-4 py-2 font-medium rounded-full text-slate-900 hover:bg-slate-400  focus:bg-slate-800 focus:text-white" onclick="btnClick(this)">{{$jam->jam}}</button>
+                        @endforeach
+                    </div>
                 </div>
-                @endforeach
-            </div>
-            <button class="mt-8 w-56 rounded-full bg-slate-500 px-10 py-4 text-lg font-bold text-white  focus:bg-slate-700 ">Book Now</button>
+                <input type="text" name="confirmDate" value="{{$currentDate}}" id="tgl" class="hidden">
+                <input type="text" name="confirmJam" value="" id="jamselected" class="hidden">
+                <input type="text" name="confirmService" value="" id="serviceselected" class="hidden">
+                <button type="submit" class="mt-8 w-56 rounded-full bg-slate-500 px-10 py-4 text-lg font-bold text-white  focus:bg-slate-700 ">Book Now</button>
+            </form>
         </div>
     </div>
     <script src="https://unpkg.com/flowbite@1.5.2/dist/datepicker.js"></script>
+    <script>
+        function btnClick(btn) {
+            var jam = document.getElementById("jamselected")
+            var radios = document.getElementsByName("radio")
+            var confirmservice = document.getElementById("serviceselected")
+            jam.value = btn.value
+
+            var selectedValue;
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    selectedValue = radios[i].value;
+                    break;
+                }
+            }
+            console.log(selectedValue)
+            confirmservice.value = selectedValue
+        }
+    </script>
 
 
     <!--===FOOTER===-->

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class BookingController extends Controller
 {
@@ -17,7 +19,8 @@ class BookingController extends Controller
             ->where('tanggal', '=', $newformat)->get();
 
         return view('booking', [
-            'tanggal' => $getboking
+            'tanggal' => $getboking,
+            'currentDate' => $newformat
         ]);
     }
 }

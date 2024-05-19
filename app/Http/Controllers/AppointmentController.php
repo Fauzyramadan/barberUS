@@ -25,14 +25,17 @@ class AppointmentController extends Controller
 
     public function store(Request $request)
     {
+        $jam = $request->jam;
         $time = strtotime($request->tanggal);
         $newformat = date('Y-m-d', $time);
         // dd($request);
         // dd(var_dump($newformat['mon'] . "/" . $newformat["mday"] . "/" . $newformat["year"]));
-        $tanggal = Tanggal::create([
-            'tanggal' => $newformat,
-            'jam' => json_encode($request->jam,)
-        ]);
+        $strjam = count($jam);
+        for ($i = 0; $i < $strjam; $i++)
+            $tanggal = Tanggal::create([
+                'tanggal' => $newformat,
+                'jam' => $jam[$i],
+            ]);
 
         return redirect()->route('appointment.index');
     }

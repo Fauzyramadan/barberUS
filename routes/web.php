@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -39,24 +40,35 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/booking', function () {
-    $tanggal =  date('Y-m-d');
-    $date = DB::table('tanggals')
-        ->where('tanggal', '=', $tanggal)
-        ->get();
-    // dd($date);
-    return view('booking', [
-        'tanggal' => $date
-    ]);
-})->middleware(['auth', 'verified'])->name('booking');
+// Route::get('/booking', function () {
+//     $tanggal =  date('Y-m-d');
+//     $date = DB::table('tanggals')
+//         ->where('tanggal', '=', $tanggal)
+//         ->get();
+//     // dd($date);
+//     return view('booking', [
+//         'tanggal' => $date
+//     ]);
+// })->middleware(['auth', 'verified'])->name('booking');
 
-// Route::middleware(['auth'])->group(function () {
-Route::post('/booking', [BookingController::class, 'booking'])->middleware('auth');
+Route::get('/booking', [BookingController::class, 'booking'])->middleware('auth');
+Route::post('/order', [BookingController::class, 'order'])->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::post('/confirm', function (Request $request) {
+
+    dd($request->all());
+    return view('confirm', [
+        'jam' => $request->confirmJam,
+        'tgl' => $request->confirmDate,
+        'price' => $request->confirmService == 'std' ? 'Rp. 20.000' : 'Rp. 30.000',
+        'service' => $request->confirmService == 'std' ? 'Standard' : 'Full Package'
+    ]);
 });
 
 Route::resource('customer', \App\Http\Controllers\CustomerController::class);
