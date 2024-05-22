@@ -32,7 +32,7 @@ class AppointmentController extends Controller
         // dd(var_dump($newformat['mon'] . "/" . $newformat["mday"] . "/" . $newformat["year"]));
         $strjam = count($jam);
         for ($i = 0; $i < $strjam; $i++)
-            $tanggal = Tanggal::create([
+            Tanggal::create([
                 'tanggal' => $newformat,
                 'jam' => $jam[$i],
             ]);

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\booking;
+use App\Models\Jadwal;
 
 
 class BookingController extends Controller

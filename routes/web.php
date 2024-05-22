@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -52,7 +53,9 @@ Route::get('/dashboard', function () {
 // })->middleware(['auth', 'verified'])->name('booking');
 
 Route::get('/booking', [BookingController::class, 'booking'])->middleware('auth');
-Route::post('/order', [BookingController::class, 'order'])->middleware('auth');
+
+Route::post('/order', [JadwalController::class, 'order'])->middleware('auth');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
