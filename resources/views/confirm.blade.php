@@ -100,14 +100,21 @@
                     </span>
                 </h4>
             </div>
-            <form method="post" action="/order">
+            <form method="post" action="order">
                 @csrf
+                <input type="text" name="name" value="{{ Auth::user()->name; }}" id="name" class="hidden">
+                <input type="text" name="nohp" value="{{ Auth::user()->nohp; }}" id="nohp" class="hidden">
                 <input type="text" name="confirmDate" value="{{$tgl}}" id="tgl" class="hidden">
                 <input type="text" name="confirmJam" value="{{$jam}}" id="jamselected" class="hidden">
                 <input type="text" name="confirmService" value="{{$service}}" id="serviceselected" class="hidden">
                 <input type="text" name="confirmPrice" value="{{$price}}" id="priceselected" class="hidden">
                 <button type="submit" class="mt-8 mx-32 w-56 rounded-full bg-slate-500 px-10 py-4 text-lg font-bold text-white  focus:bg-slate-700 ">Confirm</button>
             </form>
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
         </card>
     </div>
 </body>

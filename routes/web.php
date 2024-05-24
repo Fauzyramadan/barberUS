@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +39,8 @@ Route::get('/admin', function () {
     }
 })->middleware('auth')->name('admin');
 
+Route::get('/admin', [adminController::class, 'count'])->middleware('auth')->name('admin');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -54,8 +58,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/booking', [BookingController::class, 'booking'])->middleware('auth');
 
-Route::post('/order', [JadwalController::class, 'order'])->middleware('auth');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -64,8 +66,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/confirm', function (Request $request) {
-
-    dd($request->all());
     return view('confirm', [
         'jam' => $request->confirmJam,
         'tgl' => $request->confirmDate,
@@ -74,8 +74,9 @@ Route::post('/confirm', function (Request $request) {
     ]);
 });
 
-Route::resource('customer', \App\Http\Controllers\CustomerController::class);
+Route::post('order', [JadwalController::class, 'order'])->middleware('auth')->name('order');
 
+Route::resource('customer', \App\Http\Controllers\CustomerController::class);
 Route::resource('appointment', \App\Http\Controllers\AppointmentController::class);
 
 require __DIR__ . '/auth.php';

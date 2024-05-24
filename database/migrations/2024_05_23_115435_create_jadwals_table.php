@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('nohp');
-            $table->date('tanggal');
-            $table->time('jam');
-            $table->string('service');
-            $table->string('price');
+            $table->date('confirmDate');
+            $table->string('confirmJam');
+            $table->string('confirmService');
+            $table->string('confirmPrice');
             $table->timestamps();
         });
     }

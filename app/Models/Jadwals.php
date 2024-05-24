@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jadwal extends Model
+class Jadwals extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
         'nohp',
-        'tanggal',
-        'jam',
-        'service',
-        'price',
+        'confirmDate',
+        'confirmJam',
+        'confirmService',
+        'confirmPrice',
     ];
 }

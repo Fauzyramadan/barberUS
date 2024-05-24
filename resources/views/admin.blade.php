@@ -133,10 +133,9 @@
                                                 <path d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z" fill="currentColor"></path>
                                             </svg>
                                         </div>
-
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">2</h4>
-                                            <div class="text-gray-500">New Users</div>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{ $totalUsers }}</h4>
+                                            <div class="text-gray-500">Our Member</div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,8 +151,8 @@
                                         </div>
 
                                         <div class="mx-5">
-                                            <h4 class="text-2xl font-semibold text-gray-700">10</h4>
-                                            <div class="text-gray-500">Total Orders</div>
+                                            <h4 class="text-2xl font-semibold text-gray-700">{{$totalOrder}}</h4>
+                                            <div class="text-gray-500">Total Order</div>
                                         </div>
                                     </div>
                                 </div>

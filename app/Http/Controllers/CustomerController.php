@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-//import Model "Post
 use App\Models\User;
 
 //return type View
@@ -20,7 +19,7 @@ class CustomerController extends Controller
     public function index(): View
     {
         //get posts
-        $customers = User::latest()->paginate(5);
+        $customers = User::paginate(5);
 
         //render view with posts
         return view('customer.index', compact('customers'));
