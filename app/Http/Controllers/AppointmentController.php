@@ -37,6 +37,6 @@ class AppointmentController extends Controller
                 'jam' => $jam[$i],
             ]);
 
-        return redirect()->route('appointment.index');
+        return redirect()->route('appointment.index')->with('success', 'Appointment berhasil disimpan');
     }
 }

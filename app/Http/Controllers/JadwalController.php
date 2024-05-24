@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jadwals;
+use App\Models\Tanggal;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class JadwalController extends Controller
 {
@@ -26,7 +27,8 @@ class JadwalController extends Controller
             'confirmService' => $request->confirmService,
             'confirmPrice' => $request->confirmPrice,
         ]);
-
-        return redirect()->route('dashboard');
+        Tanggal::where(['tanggal' => $request->confirmDate, 'jam' => $request->confirmJam,])
+            ->update(['status' => 1]);
+        return redirect()->route('dashboard')->with('success', 'Booking Diterima, Dapatkan pengalaman terbaik bersama kammi.');
     }
 }

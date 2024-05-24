@@ -16,7 +16,7 @@
 </head>
 
 <body class="antialiased bg-slate-100">
-    <div class="w-screen ">
+    <div class="w-full ">
         <div class="relative mx-auto mt-24 mb-24 max-w-screen-lg overflow-hidden rounded-xl bg-slate-600/80 py-32 text-center shadow-xl shadow-slate-400">
             <h1 class="mt-2 px-8 text-5xl font-extrabold text-yellow-400 md:text-7xl">Book an Appointment</h1>
             <p class="mt-6 text-3xl text-white font-semibold">Semua Service bikin lo <span class="font-bold ">tampil beda !</span></p>
@@ -73,7 +73,11 @@
                     <p class="mt-8 text-xl font-bold text-slate-700">Select a time</p>
                     <div class="mt-4 grid lg:grid-cols-6 sm:grid-cols-4 gap-2 lg:max-w-screen ">
                         @foreach ($tanggal as $jam)
+                        @if($jam->status === 1)
+                        <button type="button" id="bt{{ $jam->id }}" value="{{ $jam->jam }}" disabled class=" bg-yellow-600/50 px-4 py-2 font-medium rounded-full text-slate-800 " onclick="dsbClick(this)">{{$jam->jam}}</button>
+                        @else
                         <button type="button" id="bt{{ $jam->id }}" value="{{ $jam->jam }}" class="bg-slate-300 px-4 py-2 font-medium rounded-full text-slate-900 hover:bg-slate-400  focus:bg-slate-800 focus:text-white" onclick="btnClick(this)">{{$jam->jam}}</button>
+                        @endif
                         @endforeach
                     </div>
                 </div>
@@ -101,6 +105,13 @@
             }
             console.log(selectedValue)
             confirmservice.value = selectedValue
+        }
+
+        function dsbClick(btn) {
+            var jam = document.getElementById("jamselected")
+            jam.value = null
+
+
         }
     </script>
 

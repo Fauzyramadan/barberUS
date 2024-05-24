@@ -61,7 +61,11 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
+                        @if (!$jam)
+                        {{ 'Jam Belum dipilih' }}
+                        @else
                         {{ $jam }}
+                        @endif
                     </p>
                 </div>
             </div>
@@ -108,13 +112,13 @@
                 <input type="text" name="confirmJam" value="{{$jam}}" id="jamselected" class="hidden">
                 <input type="text" name="confirmService" value="{{$service}}" id="serviceselected" class="hidden">
                 <input type="text" name="confirmPrice" value="{{$price}}" id="priceselected" class="hidden">
+
+                @if (!$jam)
+                <a href="/booking" class=" bg-slate-500 px-8 py-2 mx-24 rounded-full text-lg font-bold text-white  focus:bg-slate-700 ">Pilih Jam Terlebih dahulu</a>
+                @else
                 <button type="submit" class="mt-8 mx-32 w-56 rounded-full bg-slate-500 px-10 py-4 text-lg font-bold text-white  focus:bg-slate-700 ">Confirm</button>
+                @endif
             </form>
-            @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif
         </card>
     </div>
 </body>

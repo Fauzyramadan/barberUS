@@ -49,38 +49,30 @@
     </div>
 
     <!-- === HERO === -->
-    <div class="bg-slate-700 text-white py-20" id="top">
+    <div class="bg-slate-700 text-white py-20 h-full w-full" id="top">
+        <div id="parent">
+            @if (session('success'))
+            <div x-data="{ show: true }" id="child" x-show="show" class="mx-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-3" role="alert">
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">{{ session('success') }}</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <button type="button" @click="show = false" onclick="removeElement()">
+                        <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+                        </svg>
+                    </button>
+                </span>
+            </div>
+            @endif
+        </div>
         <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-16">
             <div class="flex flex-col w-full justify-center items-center p-20">
                 <h1 class="text-3xl md:text-5xl text-yellow-400 tracking-loose font-bold">US Barber & Co.</h1>
                 <h2 class="text-3xl md:text-5xl leading-relaxed md:leading-snug mb-2">Good Place for Men's Haircut</h2>
                 <p class="text-sm md:text-base text-gray-50 mb-12 ">Ekspresikan kegantengan lo dan jadilah bagian dari pria percaya diri 100%</p>
-                <!-- <a href="{{ route('register') }}" class="bg-transparent hover:bg-yellow-400 text-yellow-400 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-yellow-300 hover:border-transparent">
-                    Bergabung Sekarang</a> -->
             </div>
         </div>
     </div>
-
-    <!-- === about ===  -->
-    <!-- <div id="about" class="sm:flex items-center max-w-screen-xl">
-        <div class="xl:w-5/12 sm:w-1/2 p-12">
-            <div class="object-center text-center">
-                <img src="img/about.jpg">
-            </div>
-        </div>
-        <div class="sm:w-1/2 p-5">
-            <span class="text-gray-500 font-medium ">Learn About</span>
-            <h2 class="my-4 font-extrabold text-3xl  sm:text-4xl text-yellow-400 ">US <span class="text-slate-900 font-bold ">Barber & Co</span>
-            </h2>
-            <p class="text-gray-700 text-justify">
-                U.S Barber & Co merupakan barbershop premium di Majalengka. Kami mengutamakan kepuasaan pelanggan kami dengan memberikan layanan berkualitas tinggi seperti perlengkapan sanitasi, fasilitas nyaman, dan hair master yang berpengalaman.
-            </p>
-            <p class="text-gray-700 mt-4 mb-6 text-justify">
-                Berdiri sejak 2020, kami memberikan yang terbaik untuk customer dalam menentukan model rambut yang diinginkan dengan tidak mengabaikan perawatan rambut yang baik terhadap customer. Dengan kualitas pelayanan yang kami berikan, kami dipercaya menjadi pilihan tepat oleh customer dalam perawatan rambut. Jadilah bagian dari pria pemikat, Let's Join Now.
-            </p>
-            <a class="border-2 rounded-lg p-1 px-3 border-yellow-400 w-auto text-xl font-bold hover:bg-slate-600 hover:text-white hover:border-slate-600" href="{{ route('login') }}">Join Now</a>
-        </div>
-    </div> -->
 
     <!-- === SERVICE ===  -->
     <service id="service" class="flex flex-col mt-10 w-full justify-center items-center ">
@@ -135,6 +127,17 @@
         </div>
     </footer>
     </div>
+    <script>
+        function removeElement() {
+            var parent = document.getElementById("parent");
+            var child = document.getElementById("child");
+            if (child) {
+                parent.removeChild(child);
+            }
+        }
+    </script>
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
 </body>
 
 </html>
