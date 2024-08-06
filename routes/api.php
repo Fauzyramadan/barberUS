@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KalenderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('kalender.index', [KalenderController::class, 'index'])->middleware('auth');

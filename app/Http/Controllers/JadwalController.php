@@ -29,6 +29,6 @@ class JadwalController extends Controller
         ]);
         Tanggal::where(['tanggal' => $request->confirmDate, 'jam' => $request->confirmJam,])
             ->update(['status' => 1]);
-        return redirect()->route('dashboard')->with('success', 'Booking Diterima, Dapatkan pengalaman terbaik bersama kammi.');
+        return redirect()->route('dashboard')->with('success', 'Booking Diterima, Dapatkan pengalaman terbaik bersama kami.');
     }
 }

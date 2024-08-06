@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>US BARBER - Admin</title>
@@ -13,15 +14,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link href="img/favicon.ico" rel="icon">
     <script src="https://kit.fontawesome.com/10c2c36ccc.js" crossorigin="anonymous"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.10.1/main.min.css' rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.10.1/main.min.css' rel='stylesheet' />
+    <style>
+        /* Mengubah ukuran kolom jam */
+        .fc-timegrid-slot {
+            height: 48px;
+            /* Mengubah tinggi kolom slot */
+        }
+
+        .fc-timegrid-slot-label {
+            font-size: 18px;
+            text-align: center;
+            /* Mengubah ukuran font jam */
+        }
+    </style>
 </head>
 
 <body class="antialiased" class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
     <div>
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
             <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
-
             <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
                 <div class="flex items-center justify-center mt-8">
                     <div class="flex items-center">
@@ -42,24 +56,25 @@
                         <span class="mx-3">Dashboard</span>
                     </a>
 
-                    <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 active:bg-gray-500" href="/appointment">
+                    <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 active:bg-gray-500" href="appointment">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
                             </path>
                         </svg>
-
-                        <span class="mx-3">Appointment</span>
+                        <span class="mx-3">Appointment </span>
                     </a>
-
-                    <a class="flex items-center px-6 py-2 mt-4 fill-gray-500 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 hover:fill-slate-100 active:bg-gray-500" href="kalender">
-                        <svg class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12H20Zm0-9H4V7A1,1,0,0,1,5,6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2a1,1,0,0,1,1,1Z" />
+                    <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="kalender">
+                        <svg fill="#ffffff" class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12H20Zm0-9H4V7A1,1,0,0,1,5,6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2a1,1,0,0,1,1,1Z"></path>
+                            </g>
                         </svg>
 
-                        </svg> <span class="mx-3">Calender</span>
+                        <span class="mx-3">Calender</span>
                     </a>
-
-                    <a class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25" href="customer">
+                    <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 active:bg-gray-500" href="customer">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <g stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(1 1)">
                                 <path d="M16 18v-2a4 4 0 0 0-4-4H4a4 4 0 0 0-4 4v2"></path>
@@ -70,6 +85,7 @@
 
                         <span class="mx-3">Customer </span>
                     </a>
+
                 </nav>
             </div>
             <div class="flex flex-col flex-1 overflow-hidden">
@@ -80,9 +96,7 @@
                                 <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </button>
-
                     </div>
-
                     <div class="flex items-center">
                         <div x-data="{ notificationOpen: false }" class="relative">
                             <button @click="notificationOpen = ! notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
@@ -91,7 +105,6 @@
                                     </path>
                                 </svg>
                             </button>
-
                             <div x-show="notificationOpen" @click="notificationOpen = false" class="fixed inset-0 z-10 w-full h-full" style="display: none;"></div>
 
                             <div x-show="notificationOpen" class="absolute right-0 z-10 mt-2 overflow-hidden bg-white rounded-lg shadow-xl w-80" style="width: 20rem; display: none;">
@@ -125,56 +138,61 @@
                 </header>
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                     <div class="container px-6 py-8 mx-auto">
-                        <h3 class="text-3xl font-medium text-gray-700">Our Customer</h3>
-
-                        <div class="mt-8">
-
-                        </div>
-                        <div class="flex flex-col">
-                            <div class="-m-1.5 overflow-x-auto">
-                                <div class="p-1.5 min-w-full inline-block align-middle">
-                                    <div class="shadow-md bg-white dark:bg-slate-800 rounded-lg overflow-hidden ">
-                                        <table class="min-w-full divide-y divide-slate-500 dark:divide-slate-700">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">No</th>
-                                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Name</th>
-                                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Whatsapp</th>
-                                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Email</th>
-                                                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Role</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
-                                                @php
-                                                $i = 1
-                                                @endphp
-                                                @foreach ($customers as $customer)
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{ $i++ }}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{$customer->name}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$customer->nohp}} </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$customer->email}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">
-                                                        @if ($customer->isadmin == '1')
-                                                        <span class=" text-red-700 dark:text-yellow-400 font-bold">Admin</span>
-                                                        @else
-                                                        <span class="font-medium">Member</span>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id='calendar'></div>
                     </div>
                 </main>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var events = [];
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek', // Mengatur tampilan awal, bisa 'dayGridMonth', 'timeGridWeek', 'timeGridDay', dll.
+                timeZone: 'Asia/Jakarta',
+                slotLabelFormat: {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false, // Menampilkan dalam format 24 jam
+                },
+                slotMinTime: '08:00', // Menentukan waktu mulai
+                slotMaxTime: '22:00', // Menentukan waktu berakhir
+                slotDuration: '01:00:00', // Setel durasi slot waktu ke 1 jam
+                slotLabelInterval: '01:00', // Interval label slot waktu
+                nowIndicator: true,
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay'
+                },
+                events: function(fetchInfo, successCallback, failureCallback) {
+                    fetch('/api/kalender.index') // Mengambil data dari rute API Laravel
+                        .then(response => response.json())
+                        .then(data => {
+                            // Format data jika diperlukan
+                            const events = data.map(jadwal => ({
+                                name: jadwal.name,
+                                nohp: jadwal.nohp,
+                                Tanggal: jadwal.confirmTanggal,
+                                Jam: jadwal.confirmJam
+                            }));
+                            successCallback(events);
+                        })
+                        .catch(error => {
+                            failureCallback(error);
+                        });
+                }
+            });
+            calendar.render();
+        });
+    </script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.10.1/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@5.10.1/main.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@5.10.1/main.min.js'></script>
 </body>
 
 </html>

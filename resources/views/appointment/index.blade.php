@@ -50,7 +50,13 @@
 
                         <span class="mx-3">Appointment</span>
                     </a>
+                    <a class="flex items-center px-6 py-2 mt-4 fill-gray-500 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 hover:fill-slate-100 active:bg-gray-500" href="kalender">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19,4H17V3a1,1,0,0,0-2,0V4H9V3A1,1,0,0,0,7,3V4H5A3,3,0,0,0,2,7V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V7A3,3,0,0,0,19,4Zm1,15a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V12H20Zm0-9H4V7A1,1,0,0,1,5,6H7V7A1,1,0,0,0,9,7V6h6V7a1,1,0,0,0,2,0V6h2a1,1,0,0,1,1,1Z" />
+                        </svg>
 
+                        </svg> <span class="mx-3">Calender</span>
+                    </a>
                     <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 active:bg-gray-500" href="customer">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <g stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(1 1)">

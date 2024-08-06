@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KalenderController;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -78,5 +79,6 @@ Route::post('order', [JadwalController::class, 'order'])->middleware('auth')->na
 
 Route::resource('customer', \App\Http\Controllers\CustomerController::class);
 Route::resource('appointment', \App\Http\Controllers\AppointmentController::class);
+Route::resource('kalender', \App\Http\Controllers\KalenderController::class);
 
 require __DIR__ . '/auth.php';
