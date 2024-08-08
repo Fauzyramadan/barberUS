@@ -31,6 +31,33 @@ class KalenderController extends Controller
             return response()->json($events);
         }
         // dd($request);
+        // return response()->json([
+        //     'nama' => "fdhsgyufs"
+        // ]);
+        // Jika bukan AJAX, kembalikan view dengan data event
+        return view('kalender.index', compact('events'));
+    }
+
+    public function indexapi(Request $request)
+    {
+        $jadwals = Jadwals::select('name', 'nohp', 'confirmDate', 'confirmJam')->get();
+        $events = $jadwals->map(function ($jadwal) {
+            return [
+                'name' => $jadwal->name,
+                'nohp' => $jadwal->nohp,
+                'Tanggal' => $jadwal->confirmDate,
+                'Jam' => $jadwal->confirmJam,
+                // Anda bisa menambahkan atribut lain seperti 'color' atau 'description'
+            ];
+        });
+        // Cek apakah permintaan adalah AJAX untuk mendapatkan data dalam format JSON
+        if ($request->ajax()) {
+            return response()->json($events);
+        }
+        // dd($request);
+        return response()->json([
+            'data' => $events
+        ]);
         // Jika bukan AJAX, kembalikan view dengan data event
         return view('kalender.index', compact('events'));
     }
