@@ -167,7 +167,6 @@
 
             function replaceTimeSeparator(data) {
                 return data.map(item => {
-                    // Ubah nilai 'Jam' dengan mengganti titik dengan titik dua
                     return {
                         ...item,
                         Jam: item.Jam.replace('.', ':')
@@ -177,7 +176,7 @@
 
             function get(fetchInfo, successCallback, failureCallback) {
                 let data = []
-                fetch('http://localhost:8000/api/kalender.index') // Mengambil data dari rute API Laravel
+                fetch('http://localhost:8000/api/kalender.index')
                     .then(response => response.json())
                     .then(response => {
                         const updatedData = replaceTimeSeparator(response.data);
@@ -185,23 +184,20 @@
                             const a = {
                                 title: updatedData[i].name,
                                 start: updatedData[i].Tanggal + "T" + updatedData[i].Jam + ":00",
-                                // end: updatedData[i].Tanggal + "T" + updatedData[i].Jam + ":00",
                                 description: updatedData[i].nohp
                             }
                             data.push(a)
                         }
                         var calendar = new FullCalendar.Calendar(calendarEl, {
-                            initialView: 'timeGridWeek', // Mengatur tampilan awal, bisa 'dayGridMonth', 'timeGridWeek', 'timeGridDay', dll.
+                            initialView: 'timeGridWeek',
                             timeZone: 'Asia/Jakarta',
                             slotLabelFormat: {
                                 hour: '2-digit',
                                 minute: '2-digit',
-                                hour12: false, // Menampilkan dalam format 24 jam
+                                hour12: false,
                             },
-                            slotMinTime: '08:00', // Menentukan waktu mulai
-                            slotMaxTime: '22:00', // Menentukan waktu berakhir
-                            // slotDuration: '01:00:00', // Setel durasi slot waktu ke 1 jam
-                            // slotLabelInterval: '01:00', // Interval label slot waktu
+                            slotMinTime: '08:00',
+                            slotMaxTime: '22:00',
                             nowIndicator: true,
                             headerToolbar: {
                                 left: 'prev,next today',
