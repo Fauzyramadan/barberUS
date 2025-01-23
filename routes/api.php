@@ -22,11 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'cors'], function () {
     Route::get('/kalender.index', [KalenderController::class, 'indexapi']);
-    // Your routes here
 });
-// Route::get('kalender.index', [KalenderController::class, 'indexapi'])->middleware('auth');
-// Route::get('anjing', function () {
-//     return response()->json([
-//         'nama' => "fdhsgyufs"
-//     ]);
-// });
